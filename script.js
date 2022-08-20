@@ -11,7 +11,7 @@ const sections = ["products", "solution", "developers", "resources"];
 const dimensions = {
   products: { width: 500, height: 480, x: 150 },
   solution: { width: 400, height: 300, x: 280 },
-  developers: { width: 420, height: 350, x: 200 },
+  developers: { width: 420, height: 350, x: 340 },
   resources: { width: 380, height: 280, x: 400 },
 };
 
@@ -57,4 +57,10 @@ navLinkEls.forEach((navLink) => {
 
 headerEl.addEventListener("mouseleave", () => {
   popoverEl.classList.remove("open");
+});
+
+const menuIcon = document.getElementsByClassName("burger-nav")[0];
+const navbarlinks = document.getElementsByClassName("content")[0];
+menuIcon.addEventListener("click", function () {
+  navbarlinks.classList.toggle("open");
 });
