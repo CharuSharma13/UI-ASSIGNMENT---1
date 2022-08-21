@@ -87,14 +87,14 @@ header h2 {
 
 .Info {
   position: absolute;
-  bottom: 20%;
+  top: 39%;
   font-size: 4.8rem;
   width: 55%;
 }
 
-/* Popover ----------------------------- */
+/* dropdown ----------------------------- */
 
-.popover {
+.dropdown {
   position: absolute;
   left: 0;
   right: 0;
@@ -107,12 +107,12 @@ header h2 {
   z-index: 2;
 }
 
-.popover.open {
+.dropdown.open {
   opacity: 1;
   transform: rotateX(0);
 }
 
-.arrow {
+.pointer {
   position: absolute;
   top: -6px;
   left: 0;
@@ -167,7 +167,7 @@ header h2 {
   /* background-color: wheat; */
 }
 
-/* Products Popover ----------------------------- */
+/* Products dropdown ----------------------------- */
 
 .mobileProducts {
   display: none;
@@ -179,6 +179,10 @@ header h2 {
   display: flex;
   justify-content: flex-start;
   align-items: left;
+}
+.section-products img {
+  height: 20px;
+  width: 20px;
 }
 
 .navlist-primary li {
@@ -229,7 +233,7 @@ header h2 {
   color: #7b8ca3;
 }
 
-/* Developers Popover --------------------------------- */
+/* Developers dropdown --------------------------------- */
 
 .section-developers {
   width: var(--developers-width);
@@ -285,7 +289,7 @@ h4 {
   color: #000;
 }
 
-/* solution Popover ------------------------------------ */
+/* solution dropdown ------------------------------------ */
 
 .section-solution {
   width: var(--solution-width);
@@ -335,11 +339,16 @@ h4 {
   .login {
     display: none;
   }
-  .popover {
-    opacity: 1;
-    margin-bottom: 20px;
+  .dropdown {
+    opacity: 0;
+    /* margin-bottom: 20px; */
   }
-  .arrow {
+  .dropdown.open {
+    opacity: 1;
+    height: auto;
+    width: auto;
+  }
+  .pointer {
     position: relative;
     height: 0;
     width: 0;
@@ -379,10 +388,6 @@ h4 {
     margin: auto;
   }
 
-  .content.open {
-    height: auto;
-    padding: 20px;
-  }
   .content {
     background-color: white;
     box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
@@ -390,21 +395,27 @@ h4 {
 
     position: relative;
     overflow: none;
-    height: 0;
-    padding: 0;
   }
 }
 
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: 768px) {
   .Info {
     font-size: 3.8rem;
+  }
+  .section-products img {
+    height: 10px;
+    width: 10px;
   }
   .circle {
     display: none;
   }
+  .section-products p,
+  .product-heading {
+    display: none;
+  }
 }
 
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 600px) {
   .Info {
     font-size: 2.8rem;
   }

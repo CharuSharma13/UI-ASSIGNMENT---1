@@ -1,13 +1,10 @@
-const sectionEls = document.querySelectorAll(".section");
-const headerEl = document.querySelector(".container");
-const navLinkEls = document.querySelectorAll(".nav-link");
-const popoverEl = document.querySelector(".popover");
-const contentEl = document.querySelector(".content");
-const arrowEl = document.querySelector(".arrow");
-const backgroundEl = document.querySelector(".background");
-
-const sections = ["products", "solution", "developers", "resources"];
-
+const menuIcon = document.getElementsByClassName("burger-nav")[0];
+const navbarlinks = document.getElementsByClassName("content")[0];
+const container = document.querySelector(".container");
+const navLink = document.querySelectorAll(".nav-link");
+const pointer = document.querySelector(".pointer");
+const dropdown = document.querySelector(".dropdown");
+const context = document.querySelector(".content");
 const dimensions = {
   products: { width: 500, height: 480, x: 150 },
   solution: { width: 400, height: 300, x: 280 },
@@ -15,52 +12,58 @@ const dimensions = {
   resources: { width: 380, height: 280, x: 400 },
 };
 
-const popoverLeft = popoverEl.getBoundingClientRect().x;
-
-navLinkEls.forEach((navLink) => {
-  let section = navLink.getAttribute("data-nav");
-  let rect = navLink.getBoundingClientRect();
-  dimensions[section].arrowX = rect.left + rect.width / 2 - popoverLeft;
+navLink.forEach((navLink) => {
+  const coords = dropdown.getBoundingClientRect().x;
+  let navItems = navLink.getAttribute("data-nav");
+  let navCoords = navLink.getBoundingClientRect();
+  dimensions[navItems].pointerX = navCoords.left + navCoords.width / 2 - coords;
 });
 
-arrowEl.style.transform = `
-translateX(${dimensions.products.arrowX}px)
+pointer.style.transform = `
+translateX(${dimensions.products.pointerX}px)
 rotate(45deg)`;
 
 function showSection(section) {
-  popoverEl.classList.add("open");
-  sectionEls.forEach((el) => el.classList.remove("active"));
+  const surround = document.querySelector(".background");
+  const segment = document.querySelectorAll(".section");
+  dropdown.classList.add("open");
+  segment.forEach((el) => el.classList.remove("active"));
   document.querySelector(`.section-${section}`).classList.add("active");
 
-  arrowEl.style.transform = `
-translateX(${dimensions[section].arrowX}px)
+  pointer.style.transform = `
+translateX(${dimensions[section].pointerX}px)
 rotate(45deg)`;
 
-  backgroundEl.style.transform = `
+  surround.style.transform = `
 translateX(${dimensions[section].x}px)
 scaleX(${dimensions[section].width / dimensions["products"].width})
 scaleY(${dimensions[section].height / dimensions["products"].height})
 `;
 
-  contentEl.style.width = dimensions[section].width + "px";
-  contentEl.style.height = dimensions[section].height + "px";
+  context.style.width = dimensions[section].width + "px";
+  context.style.height = dimensions[section].height + "px";
 
-  contentEl.style.transform = `translateX(${dimensions[section].x}px)`;
+  context.style.transform = `translateX(${dimensions[section].x}px)`;
 }
 
-navLinkEls.forEach((navLink) => {
+navLink.forEach((navLink) => {
   navLink.addEventListener("mouseenter", (event) => {
-    let targetPopover = event.target.getAttribute("data-nav");
-    showSection(targetPopover);
+    let targetdropdown = event.target.getAttribute("data-nav");
+    showSection(targetdropdown);
   });
 });
 
-headerEl.addEventListener("mouseleave", () => {
-  popoverEl.classList.remove("open");
+container.addEventListener("mouseleave", () => {
+  dropdown.classList.remove("open");
 });
 
-const menuIcon = document.getElementsByClassName("burger-nav")[0];
-const navbarlinks = document.getElementsByClassName("content")[0];
 menuIcon.addEventListener("click", function () {
-  navbarlinks.classList.toggle("open");
+  dropdown.classList.toggle("open");
+});
+
+const mql = window.matchMedia("(min-width: 992px)");
+
+mql.addEventListener("change", () => {
+  dropdown.classList.remove("open");
+  context.removeAttribute("style");
 });
