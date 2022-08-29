@@ -36,7 +36,7 @@ navLink.forEach((navLink) => {
   });
 });
 
-container.addEventListener("mouseleave", () => {
+dropdown.addEventListener("mouseleave", () => {
   dropdown.classList.remove("open");
 });
 
