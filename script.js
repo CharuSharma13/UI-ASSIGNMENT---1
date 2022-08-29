@@ -6,49 +6,32 @@ const pointer = document.querySelector(".pointer");
 const dropdown = document.querySelector(".dropdown");
 const context = document.querySelector(".content");
 const dimensions = {
-  products: { width: 500, height: 480, x: 150 },
-  solution: { width: 400, height: 300, x: 280 },
-  developers: { width: 420, height: 350, x: 340 },
-  resources: { width: 380, height: 280, x: 400 },
+  products: { x: 150 },
+  solution: { x: 200 },
+  developers: { x: 200 },
+  resources: { x: 300 },
 };
-
-navLink.forEach((navLink) => {
-  const coords = dropdown.getBoundingClientRect().x;
-  let navItems = navLink.getAttribute("data-nav");
-  let navCoords = navLink.getBoundingClientRect();
-  dimensions[navItems].pointerX = navCoords.left + navCoords.width / 2 - coords;
-});
-
-pointer.style.transform = `
-translateX(${dimensions.products.pointerX}px)
-rotate(45deg)`;
-
 function showSection(section) {
-  const surround = document.querySelector(".background");
+  var localSection = section.getAttribute("data-nav");
   const segment = document.querySelectorAll(".section");
   dropdown.classList.add("open");
   segment.forEach((el) => el.classList.remove("active"));
-  document.querySelector(`.section-${section}`).classList.add("active");
+  document.querySelector(`.section-${localSection}`).classList.add("active");
 
+  const coords = dropdown.getBoundingClientRect().x;
+  let navCoords = section.getBoundingClientRect();
+  dimensions[localSection].pointerX =
+    navCoords.left + navCoords.width / 2 - coords;
   pointer.style.transform = `
-translateX(${dimensions[section].pointerX}px)
-rotate(45deg)`;
+  translateX(${dimensions[localSection].pointerX}px)
+  rotate(45deg)`;
 
-  surround.style.transform = `
-translateX(${dimensions[section].x}px)
-scaleX(${dimensions[section].width / dimensions["products"].width})
-scaleY(${dimensions[section].height / dimensions["products"].height})
-`;
-
-  context.style.width = dimensions[section].width + "px";
-  context.style.height = dimensions[section].height + "px";
-
-  context.style.transform = `translateX(${dimensions[section].x}px)`;
+  context.style.transform = `translateX(${dimensions[localSection].x}px)`;
 }
 
 navLink.forEach((navLink) => {
   navLink.addEventListener("mouseenter", (event) => {
-    let targetdropdown = event.target.getAttribute("data-nav");
+    let targetdropdown = event.target;
     showSection(targetdropdown);
   });
 });

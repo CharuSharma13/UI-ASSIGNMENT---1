@@ -129,7 +129,7 @@ header h2 {
 }
 
 .background {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
   width: var(--products-width);
@@ -141,18 +141,20 @@ header h2 {
     0 30px 60px -30px rgba(0, 0, 0, 0.3);
   transform-origin: 0 0;
   transition: transform var(--transition-duration),
-    opacity var(--transition-duration);
+    opacity var(--transition-duration); */
 }
 
 .content {
   position: absolute;
   overflow: hidden;
   z-index: 1;
-  top: 0;
+  top: -16px;
   left: 0;
   padding: var(--padding);
   transition: transform var(--transition-duration),
     opacity var(--transition-duration);
+  width: 500px;
+  height: 500px;
 }
 
 .section {
@@ -171,6 +173,14 @@ header h2 {
 
 .mobileProducts {
   display: none;
+}
+
+.section-products,
+.section-developers,
+.section-resources,
+.section-solution {
+  background-color: #fff;
+  padding: 32px;
 }
 
 .section-products {
@@ -386,6 +396,7 @@ h4 {
     height: auto;
     width: 80%;
     margin: auto;
+    padding: 0;
   }
 
   .content {
@@ -395,6 +406,8 @@ h4 {
 
     position: relative;
     overflow: none;
+    width: auto;
+    height: auto;
   }
 }
 
